@@ -1,4 +1,4 @@
-package datatypes_test
+package datatype_test
 
 import (
 	"database/sql/driver"

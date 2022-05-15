@@ -1,4 +1,4 @@
-package datatypes
+package datatype
 
 import (
 	"context"
@@ -193,7 +193,6 @@ func (jsonQuery *JSONQueryExpression) Build(builder clause.Builder) {
 		}
 	}
 }
-
 
 const prefix = "$."
 
