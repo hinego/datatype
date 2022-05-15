@@ -64,3 +64,11 @@ func (m *IPPrefix) Scan(val interface{}) error {
 	*m = t
 	return err
 }
+func (r IPPrefix) Contains(ip netip.Addr) bool {
+	for _, prefix := range r {
+		if prefix.Contains(ip) {
+			return true
+		}
+	}
+	return false
+}
