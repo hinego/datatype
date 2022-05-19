@@ -10,6 +10,10 @@ import (
 // Int64 is an atomic wrapper around an int64.
 type Int64 struct{ v int64 }
 
+func NewInt64(i int64) *Int64 {
+	return &Int64{i}
+}
+
 // Load atomically loads the wrapped value.
 func (r *Int64) Load() int64 {
 	return atomic.LoadInt64(&r.v)
