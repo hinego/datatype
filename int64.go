@@ -2,6 +2,8 @@ package datatype
 
 import (
 	"database/sql/driver"
+	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 	"log"
 	"reflect"
 	"sync/atomic"
@@ -12,6 +14,21 @@ type Int64 struct{ v int64 }
 
 func NewInt64(i int64) *Int64 {
 	return &Int64{i}
+}
+func (Int64) GormDataType() string {
+	return "bigint"
+}
+
+func (Int64) GormDBDataType(db *gorm.DB, field *schema.Field) string {
+	switch db.Dialector.Name() {
+	case "sqlite":
+		return "BIGINT"
+	case "mysql":
+		return "BIGINT"
+	case "postgres":
+		return "BIGINT"
+	}
+	return ""
 }
 
 // Load atomically loads the wrapped value.
@@ -55,10 +72,11 @@ func (r *Int64) Swap(n int64) int64 {
 }
 
 func (r *Int64) Value() (driver.Value, error) {
+	log.Println("Value", r.Load())
 	return r.Load(), nil
 }
 func (r *Int64) Scan(val interface{}) error {
-	log.Println("val", val)
-	log.Println("val", reflect.TypeOf(val))
+	log.Println("Scan", val)
+	log.Println("Scan", reflect.TypeOf(val))
 	return nil
 }
