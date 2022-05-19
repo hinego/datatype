@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/jinzhu/now v1.1.5
+	go.uber.org/atomic v1.6.0
 	gorm.io/datatypes v1.0.6
 	gorm.io/driver/mysql v1.3.3
 	gorm.io/driver/postgres v1.3.5
