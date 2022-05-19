@@ -4,6 +4,8 @@ import (
 	"database/sql/driver"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+	"log"
+	"reflect"
 	"sync/atomic"
 )
 
@@ -80,6 +82,8 @@ func (r *Int64) Value() (driver.Value, error) {
 	return r.Load(), nil
 }
 func (r *Int64) Scan(val interface{}) error {
+	log.Println("val", val)
+	log.Println("val", reflect.TypeOf(val))
 	r.Store(val.(int64))
 	return nil
 }
